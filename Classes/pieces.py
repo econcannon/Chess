@@ -21,8 +21,11 @@ class Pieces:
         if not role in role_dict:
             raise IOError('Invalid role')
         role_dict['pawn']
+        #create dict of current pieces on board
 
 
-    def valid_move(self, rank):
+    def valid_move(self, rank, color):
+        #for objects of certain color in pieces, check moves if move overlaps king position, king in check
         pass
-    
+
+
