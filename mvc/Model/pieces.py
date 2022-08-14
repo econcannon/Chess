@@ -1,11 +1,16 @@
 from abc import ABC, abstractmethod
 import pygame
 
+from board import Board
+
 white = []
 black = []
 
+#Move to proper file later
+pygame.display()
+
 #black pieces
-black_pawn_img = pygame.image.load('Imgs\\black_pawn.png').convert()
+black_pawn_img = pygame.image.load('mvc\\Model\\Imgs\\black_pawn.png').convert()
 black_rook_img = pygame.image.load('Imgs\\black_rook.png').convert()
 black_knight_img = pygame.image.load('Imgs\\black_knight.png').convert()
 black_bishop_img = pygame.image.load('Imgs\\black_bishop.png').convert()
@@ -40,11 +45,25 @@ class Pieces(ABC):
         self.color = color
         self.location = location
         self.draw
+        self.moves = []
+        
+#for objects of certain color in pieces, check moves if move overlaps king position, king in check
+    def valid_move(self, board):
+        for move in self.moves:
+
+            #check border of board
+            if (move[0] < 0) or (move[1]) < 0:
+                self.moves.remove(move)
+            elif (move[0] > 8) or (move[1] > 8):
+                self.moves.remove(move)
+            
+            #check if cell contains piece of own color
+            if board.get_cell(move[0][1]).color == self.color:
+                self.moves.remove(move)
 
 
-    def valid_move(self, location, color):
-        #for objects of certain color in pieces, check moves if move overlaps king position, king in check
-        pass
+    def update_location(self, location):
+        self.location[0], self.location[1] = location[0], location[1]
 
 
     def draw_img(self, win):

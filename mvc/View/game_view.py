@@ -1,9 +1,14 @@
 from Model.board import Board
+import pygame
 
 class GameView:
 
     def __init__(self) -> None:
-        pass
+        screen_height, screen_width = 600, 600
+        block_height, block_width = screen_height/8, screen_width/8
+        self.main_display = Board(screen_height, screen_width, block_height, block_width)
+        self.main_display.display_board()
+        pygame.display.set_caption('Chess')
 
 
     def get_move():
@@ -14,14 +19,10 @@ class GameView:
         pass
 
     
-    def display_board():
-        screen_height, screen_width = 600, 600
-        block_height, block_width = screen_height/8, screen_width/8
-        main_display = Board(screen_height, screen_width, block_height, block_width)
-        for x in range(8):
-            for y in range(8):
-                main_display.get_cell(x,y)
-                
+    def display_board(self):
+        self.main_display.display_board(self)
+
+
 
 
     def display_winner():

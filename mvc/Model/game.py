@@ -6,14 +6,21 @@ class Game:
     def __init__(self) -> None:
         self.current_player = Player.White
         self.board = Board()
+        self.turn = 0
 
     
-    def check_move(self, piece):
-        pass
+    def check_move(self, piece, move):
+        if move in piece.moves:
+            self.execute_move(move)
 
     
-    def make_move(self, location):
+    def choose_move(self, location):
         self.location = location
+
+
+    def execute_move(self, move):
+        pass
+        
 
 
     def change_curr_player(self):
