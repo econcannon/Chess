@@ -15,9 +15,6 @@ pygame.display.set_caption('Chess')
 board_img = pygame.image.load('mvc\\Model\\Imgs\\chess_board_img.png').convert()
 board_img = pygame.transform.scale(board_img,(screen_width, screen_height))
 
-white = []
-black = []
-
 #black pieces
 black_pawn_img = pygame.image.load('mvc\\Model\\Imgs\\black_pawn.png').convert()
 black_rook_img = pygame.image.load('mvc\\Model\\Imgs\\black_rook.png').convert()
@@ -34,19 +31,27 @@ white_bishop_img = pygame.image.load('mvc\\Model\\Imgs\\white_bishop.png').conve
 white_queen_img = pygame.image.load('mvc\\Model\\Imgs\\white_queen.png').convert()
 white_king_img = pygame.image.load('mvc\\Model\\Imgs\\white_king.png').convert()
 
+#white piece scale
+white_pawn_img = pygame.transform.scale(white_pawn_img, (100, 100))
+white_rook_img = pygame.transform.scale(white_rook_img, (100, 100))
+white_knight_img = pygame.transform.scale(white_knight_img, (100, 100))
+white_bishop_img = pygame.transform.scale(white_bishop_img, (100, 100))
+white_queen_img = pygame.transform.scale(white_queen_img, (100, 100))
+white_king_img = pygame.transform.scale(white_king_img, (100, 100))
 
-white = [white_pawn_img, white_rook_img, white_knight_img, white_bishop_img, white_queen_img, white_king_img]
-black = [black_pawn_img, black_rook_img, black_knight_img, black_bishop_img, black_queen_img, black_king_img]
-
-for img in white:
-    pygame.transform.scale(img, (block_width*1/2, block_height*3/4))
-for img in black:
-    pygame.transform.scale(img, (block_width*1/2, block_height*3/4))
+#black piece scale
+black_pawn_img = pygame.transform.scale(black_pawn_img, (100, 100))
+black_rook_img = pygame.transform.scale(black_rook_img, (100, 100))
+black_knight_img = pygame.transform.scale(black_knight_img, (100, 100))
+black_bishop_img = pygame.transform.scale(black_bishop_img, (100, 100))
+black_queen_img = pygame.transform.scale(black_queen_img, (100, 100))
+black_king_img = pygame.transform.scale(black_king_img, (100, 100))
 
 
 #blit images
 win.blit(board_img, (0,0))
-win.blit(white_pawn_img, (150,150))
+win.blit(white_pawn_img, (0,0))
+win.blit(white_bishop_img, (100,100))
 
 
 
