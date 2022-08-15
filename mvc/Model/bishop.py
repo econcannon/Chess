@@ -1,11 +1,9 @@
-from pieces import Pieces
-from board import Board
-import Model.Imgs 
+from pieces import Pieces 
 
 class Bishop(Pieces):
 
     def __init__(self, color, location) -> None:
-        super().__init__(self, color, location)
+        super().__init__(color, location)
         self.img = 3
 
 
@@ -13,78 +11,66 @@ class Bishop(Pieces):
         i = 0
         subset = []
 
+        #move to top right
+        for i in range(1,8):
 
-        #up to the right
-        i = 0
-        while self.location[0] < 8 and self.location[1] < 8:
-
-            if self.color == 'w':
-                #up to the right for white
-                x = self.location[0] + i, self.location[1] + i
-
-            else: 
-                #up to the right for black
-                x = self.location[0] - i, self.location[1] - i
+            x = self.location[0] + i, self.location[1] + i
+            if (x[0] > 7) or (x[1] > 7) or (x[0] < 0) or (x[1] < 0):
+                break
 
             if board.get_cell(x[0], x[1]) != 0:
-                if board.get_cell(x[0],x[1]).color == self.color:
-                    break
-                if board.get_cell(x[0],x[1]).color != self.color:
+                if board.get_cell(x[0], x[1]).color != self.color:
                     self.moves.append(x)
                     break
-
-            self.moves.append(x)
+                else: break
             
-
-
-
-
-        #up to the left
-        i = 0
-        while self.location[0] < 8 and self.location[1] < 8:
-
-            if self.color == 'w':
-                #up to the left for white
-                y = self.location[0] + i, self.location[1] - i
-                subset.append(y)
-            else:
-                #up to the left for black
-                y = self.location[0] - i, self.location[1] + i
-                subset.append(y)
+            else: self.moves.append(x)
         
+        #Move to top left
+        for i in range(1,8):
 
-        #down to the left
-        i = 0
-        while self.location[0] < 8 and self.location[1] < 8:
+            x = self.location[0] + i, self.location[1] - i
+            if (x[0] > 7) or (x[1] > 7) or (x[0] < 0) or (x[1] < 0):
+                break
 
-            if self.color == 'w':
-                #down to the left for white
-                k = self.location[0] - i, self.location[1] - i
-                subset.append(k)
-            else:
-                #down to the left for black
-                k = self.location[0] + i, self.location[1] + i
-                subset.append(k)
-        
-
-        #down to the right
-        i = 0
-        while self.location[0] < 8 and self.location[1] < 8:
-
-            if self.color == 'w':
-                #down to the right for white
-                j = self.location[0] - i, self.location[1] + i
-                subset.append(j)
-            else:
-                #down to the right for black
-                j = self.location[0] + i, self.location[1] - i
-                subset.append(j)
+            if board.get_cell(x[0], x[1]) != 0:
+                if board.get_cell(x[0], x[1]).color != self.color:
+                    self.moves.append(x)
+                    break
+                else: break
             
-        for move in subset:
-            if board.get_cell(move[0], move[1]) == 0:
-                self.moves.append(move)
-            else: break
-        i += 1            
+            else: self.moves.append(x)
+
+        #Move to bottom left
+        for i in range(1,8):
+
+            x = self.location[0] - i, self.location[1] - i
+            if (x[0] > 7) or (x[1] > 7) or (x[0] < 0) or (x[1] < 0):
+                break
+
+            if board.get_cell(x[0], x[1]) != 0:
+                if board.get_cell(x[0], x[1]).color != self.color:
+                    self.moves.append(x)
+                    break
+                else: break
+            
+            else: self.moves.append(x)
+
+        
+        #Move to bottom
+        for i in range(1,8):
+
+            x = self.location[0] - i, self.location[1]
+            if (x[0] > 7) or (x[1] > 7) or (x[0] < 0) or (x[1] < 0):
+                break
+
+            if board.get_cell(x[0], x[1]) != 0:
+                if board.get_cell(x[0], x[1]).color != self.color:
+                    self.moves.append(x)
+                    break
+                else: break
+            
+            else: self.moves.append(x)
 
 
     def move_piece(self):
@@ -92,4 +78,4 @@ class Bishop(Pieces):
 
 
     def __str__(self):
-        f'bishop'
+        return f'Bishop'

@@ -1,0 +1,5 @@
+Working on displaying a board in game_view.py using a loop to go through the currently active pieces 
+and getting their rows and cols
+
+Finished the loop, but working on a test blit of all of the images, figuring out if board should be initialized
+in game_view or if it should be initialized elsewhere

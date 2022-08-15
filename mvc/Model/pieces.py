@@ -1,29 +1,28 @@
 from abc import ABC, abstractmethod
 import pygame
 
-from board import Board
 
 white = []
 black = []
 
 #Move to proper file later
-pygame.display()
+#pygame.display()
 
 #black pieces
-black_pawn_img = pygame.image.load('mvc\\Model\\Imgs\\black_pawn.png').convert()
-black_rook_img = pygame.image.load('Imgs\\black_rook.png').convert()
-black_knight_img = pygame.image.load('Imgs\\black_knight.png').convert()
-black_bishop_img = pygame.image.load('Imgs\\black_bishop.png').convert()
-black_queen_img = pygame.image.load('Imgs\\black_queen.png').convert()
-black_king_img = pygame.image.load('Imgs\\black_king.png').convert()
+black_pawn_img = pygame.image.load('mvc\\Model\\Imgs\\black_pawn.png')
+black_knight_img = pygame.image.load('mvc\\Model\\Imgs\\black_knight.png')
+black_bishop_img = pygame.image.load('mvc\\Model\\Imgs\\black_bishop.png')
+black_queen_img = pygame.image.load('mvc\\Model\\Imgs\\black_queen.png')
+black_king_img = pygame.image.load('mvc\\Model\\Imgs\\black_king.png')
+black_rook_img = pygame.image.load('mvc\\Model\\Imgs\\black_rook.png')
 
 #white pieces
-white_pawn_img = pygame.image.load('Imgs\\white_pawn.png').convert()
-white_rook_img = pygame.image.load('Imgs\\white_rook.png').convert()
-white_knight_img = pygame.image.load('Imgs\\white_knight.png').convert()
-white_bishop_img = pygame.image.load('Imgs\\white_bishop.png').convert()
-white_queen_img = pygame.image.load('Imgs\\white_queen.png').convert()
-white_king_img = pygame.image.load('Imgs\\white_king.png').convert()
+white_pawn_img = pygame.image.load('mvc\\Model\\Imgs\\white_pawn.png')
+white_rook_img = pygame.image.load('mvc\\Model\\Imgs\\white_rook.png')
+white_knight_img = pygame.image.load('mvc\\Model\\Imgs\\white_knight.png')
+white_bishop_img = pygame.image.load('mvc\\Model\\Imgs\\white_bishop.png')
+white_queen_img = pygame.image.load('mvc\\Model\\Imgs\\white_queen.png')
+white_king_img = pygame.image.load('mvc\\Model\\Imgs\\white_king.png')
 
 
 white = [white_pawn_img, white_rook_img, white_knight_img, white_bishop_img, white_queen_img, white_king_img]
@@ -41,10 +40,10 @@ for img in black:
 
 class Pieces(ABC):
 
-    def __init__(self, color, location):
+    def __init__(self, color, location: tuple):
         self.color = color
         self.location = location
-        self.draw
+        #self.draw
         self.moves = []
         
 #for objects of certain color in pieces, check moves if move overlaps king position, king in check
@@ -74,3 +73,5 @@ class Pieces(ABC):
 
         x, y = self.location[0]*1/4, self.location[1]*1/8
         win.blit(img, (x,y))
+
+    

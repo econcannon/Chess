@@ -6,52 +6,53 @@ screen_height = 600
 screen_width= 600
 block_height = screen_height/8
 block_width = screen_height/8
+x_pos = block_width*1/4
+y_pos = block_height*1/8
 
 win = pygame.display.set_mode((screen_height,screen_width))
 pygame.display.set_caption('Chess')
 
-
 #load images
-board_img = pygame.image.load('mvc\\Model\\Imgs\\chess_board_img.png').convert()
+board_img = pygame.image.load('mvc\\Model\\Imgs\\chess_board_img.png')
 board_img = pygame.transform.scale(board_img,(screen_width, screen_height))
 
 #black pieces
-black_pawn_img = pygame.image.load('mvc\\Model\\Imgs\\black_pawn.png').convert()
-black_rook_img = pygame.image.load('mvc\\Model\\Imgs\\black_rook.png').convert()
-black_knight_img = pygame.image.load('mvc\\Model\\Imgs\\black_knight.png').convert()
-black_bishop_img = pygame.image.load('mvc\\Model\\Imgs\\black_bishop.png').convert()
-black_queen_img = pygame.image.load('mvc\\Model\\Imgs\\black_queen.png').convert()
-black_king_img = pygame.image.load('mvc\\Model\\Imgs\\black_king.png').convert()
+black_pawn_img = pygame.image.load('mvc\\Model\\Imgs\\black_pawn.png')
+black_rook_img = pygame.image.load('mvc\\Model\\Imgs\\black_rook.png')
+black_knight_img = pygame.image.load('mvc\\Model\\Imgs\\black_knight.png')
+black_bishop_img = pygame.image.load('mvc\\Model\\Imgs\\black_bishop.png')
+black_queen_img = pygame.image.load('mvc\\Model\\Imgs\\black_queen.png')
+black_king_img = pygame.image.load('mvc\\Model\\Imgs\\black_king.png')
 
 #white pieces
-white_pawn_img = pygame.image.load('mvc\\Model\\Imgs\\white_pawn.png').convert()
-white_rook_img = pygame.image.load('mvc\\Model\\Imgs\\white_rook.png').convert()
-white_knight_img = pygame.image.load('mvc\\Model\\Imgs\\white_knight.png').convert()
-white_bishop_img = pygame.image.load('mvc\\Model\\Imgs\\white_bishop.png').convert()
-white_queen_img = pygame.image.load('mvc\\Model\\Imgs\\white_queen.png').convert()
-white_king_img = pygame.image.load('mvc\\Model\\Imgs\\white_king.png').convert()
+white_pawn_img = pygame.image.load('mvc\\Model\\Imgs\\white_pawn.png')
+white_rook_img = pygame.image.load('mvc\\Model\\Imgs\\white_rook.png')
+white_knight_img = pygame.image.load('mvc\\Model\\Imgs\\white_knight.png')
+white_bishop_img = pygame.image.load('mvc\\Model\\Imgs\\white_bishop.png')
+white_queen_img = pygame.image.load('mvc\\Model\\Imgs\\white_queen.png')
+white_king_img = pygame.image.load('mvc\\Model\\Imgs\\white_king.png')
 
 #white piece scale
-white_pawn_img = pygame.transform.scale(white_pawn_img, (100, 100))
-white_rook_img = pygame.transform.scale(white_rook_img, (100, 100))
-white_knight_img = pygame.transform.scale(white_knight_img, (100, 100))
-white_bishop_img = pygame.transform.scale(white_bishop_img, (100, 100))
-white_queen_img = pygame.transform.scale(white_queen_img, (100, 100))
-white_king_img = pygame.transform.scale(white_king_img, (100, 100))
+white_pawn_img = pygame.transform.scale(white_pawn_img, (block_width*1/2, block_height*3/4))
+white_rook_img = pygame.transform.scale(white_rook_img, (block_width*1/2, block_height*3/4))
+white_knight_img = pygame.transform.scale(white_knight_img, (block_width*1/2, block_height*3/4))
+white_bishop_img = pygame.transform.scale(white_bishop_img, (block_width*1/2, block_height*3/4))
+white_queen_img = pygame.transform.scale(white_queen_img, (block_width*1/2, block_height*3/4))
+white_king_img = pygame.transform.scale(white_king_img, (block_width*1/2, block_height*3/4))
 
 #black piece scale
-black_pawn_img = pygame.transform.scale(black_pawn_img, (100, 100))
-black_rook_img = pygame.transform.scale(black_rook_img, (100, 100))
-black_knight_img = pygame.transform.scale(black_knight_img, (100, 100))
-black_bishop_img = pygame.transform.scale(black_bishop_img, (100, 100))
-black_queen_img = pygame.transform.scale(black_queen_img, (100, 100))
-black_king_img = pygame.transform.scale(black_king_img, (100, 100))
+black_pawn_img = pygame.transform.scale(black_pawn_img, (block_width*1/2, block_height*3/4))
+black_rook_img = pygame.transform.scale(black_rook_img, (block_width*1/2, block_height*3/4))
+black_knight_img = pygame.transform.scale(black_knight_img, (block_width*1/2, block_height*3/4))
+black_bishop_img = pygame.transform.scale(black_bishop_img, (block_width*1/2, block_height*3/4))
+black_queen_img = pygame.transform.scale(black_queen_img, (block_width*1/2, block_height*3/4))
+black_king_img = pygame.transform.scale(black_king_img, (block_width*1/2, block_height*3/4))
 
 
 #blit images
 win.blit(board_img, (0,0))
-win.blit(white_pawn_img, (0,0))
-win.blit(white_bishop_img, (100,100))
+win.blit(white_pawn_img, (x_pos + block_width,y_pos + block_height))
+win.blit(white_bishop_img, (2*block_width + x_pos, y_pos))
 
 
 run = True
