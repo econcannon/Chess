@@ -54,7 +54,6 @@ win.blit(white_pawn_img, (0,0))
 win.blit(white_bishop_img, (100,100))
 
 
-
 run = True
 while run:
     pygame.time.delay(100)
