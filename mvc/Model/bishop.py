@@ -1,14 +1,16 @@
-from pieces import Pieces 
+from mvc.Model.pieces import Pieces 
 
 class Bishop(Pieces):
 
     def __init__(self, color, location) -> None:
         super().__init__(color, location)
         self.img = 3
+        self.turn = 0
 
 
     def append_moves(self, board):
         i = 0
+        self.moves = []
         subset = []
 
         #move to top right
@@ -57,10 +59,10 @@ class Bishop(Pieces):
             else: self.moves.append(x)
 
         
-        #Move to bottom
+        #Move to bottom right
         for i in range(1,8):
 
-            x = self.location[0] - i, self.location[1]
+            x = self.location[0] - i, self.location[1] + i
             if (x[0] > 7) or (x[1] > 7) or (x[0] < 0) or (x[1] < 0):
                 break
 

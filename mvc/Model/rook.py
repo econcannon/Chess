@@ -1,4 +1,4 @@
-from pieces import Pieces
+from mvc.Model.pieces import Pieces
 
 class Rook(Pieces):
 
@@ -7,10 +7,12 @@ class Rook(Pieces):
         #self.location = location
         super().__init__(color, location)
         self.img = 1
+        self.turn = 0
 
 
     def append_moves(self, board):
         
+        self.moves = []        
         #Move to top
         for i in range(1,8):
 

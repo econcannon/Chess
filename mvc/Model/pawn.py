@@ -1,4 +1,4 @@
-from pieces import Pieces
+from mvc.Model.pieces import Pieces
 
 class Pawn(Pieces):
 
@@ -9,51 +9,64 @@ class Pawn(Pieces):
 
     
     def append_moves(self, board):
+
+        self.moves = []
         x = []
+
         if self.color == 'b':
-            x.append((self.location[0] + 1, self.location[1]))
-            if self.turn == 0:
-                x.append((self.location[0] + 2, self.location[1]))
 
-            #test diagonal 
-            cell = board.get_cell(self.location[0] + 1, self.location[1] + 1)
-            if cell != 0:
-                if cell.color != self.color:
-                    x.append((self.location[0] + 1, self.location + 1))
+            if (self.location[0] + 1 < 8):
+
+                if board.get_cell(self.location[0] + 1, self.location[1]) == 0:
+                    x.append((self.location[0] + 1, self.location[1]))
+
+            if self.turn == 0:
+                if (board.get_cell(self.location[0]+1, self.location[1]) == 0) and (board.get_cell(self.location[0]+2, self.location[1])) == 0:
+                    x.append((self.location[0] + 2, self.location[1]))
+
+            #test diagonal
+            if (self.location[0] + 1 < 8) and (self.location[1] + 1 < 7):
+                cell = board.get_cell(self.location[0] + 1, self.location[1] + 1)
+                if cell != 0:
+                    if cell.color != self.color:
+                        x.append((self.location[0] + 1, self.location[1] + 1))
+
             #test other diagonal
-            cell = board.get_cell(self.location[0] + 1, self.location[1] - 1)
-            if cell != 0:
-                if cell.color != self.color:
-                    x.append((self.location[0] + 1, self.location - 1))
-        
+            if (self.location[0] + 1 < 8) and (self.location[1] - 1 > -1):
+                cell = board.get_cell(self.location[0] + 1, self.location[1] - 1)
+                if cell != 0:
+                    if cell.color != self.color:
+                        x.append((self.location[0] + 1, self.location[1] - 1))
+            
         if self.color == 'w':
-            x.append((self.location[0] - 1, self.location[1]))
+
+            if (self.location[0] - 1 > 0):
+                if board.get_cell(self.location[0] - 1, self.location[1]) == 0:
+                    x.append((self.location[0] - 1, self.location[1]))
+
             if self.turn == 0:
-                x.append((self.location[0] - 2, self.location[1]))
+                if (board.get_cell(self.location[0] - 1, self.location[1]) == 0) and (board.get_cell(self.location[0] - 2, self.location[1])) == 0:
+                    x.append((self.location[0] - 2, self.location[1]))
 
             #test diagonal 
-            cell = board.get_cell(self.location[0] - 1, self.location[1] + 1)
-            if cell != 0:
-                if cell.color != self.color:
-                    x.append((self.location[0] - 1, self.location + 1))
+            if (self.location[0] - 1 > -1) and (self.location[1] + 1 < 7):
+                cell = board.get_cell(self.location[0] - 1, self.location[1] + 1)
+                if cell != 0:
+                    if cell.color != self.color:
+                        x.append((self.location[0] - 1, self.location[1] + 1))
+
             #test other diagonal
-            cell = board.get_cell(self.location[0] - 1, self.location[1] - 1)
-            if cell != 0:
-                if cell.color != self.color:
-                    x.append((self.location[0] - 1, self.location - 1))
+            if (self.location[0] - 1 > -1) and (self.location[1] - 1 > -1):
+                cell = board.get_cell(self.location[0] - 1, self.location[1] - 1)
+                if cell != 0:
+                    if cell.color != self.color:
+                        x.append((self.location[0] - 1, self.location[1] - 1))
         
         for pos in x:
-            if board.get_cell(pos[0], pos[1]) != 0:
-
-                if board.get_cell(pos[0], pos[1]).color != self.color:
-                    self.moves.append(pos)
-                else: continue
-                
+            if (pos[0] < 0) or (pos[0] > 7) or (pos[1] < 0) or (pos[1] > 7):
+                x.remove(pos)
+                continue
             else: self.moves.append(pos)
-
-
-
-
 
 
     def __str__(self) -> str:

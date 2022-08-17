@@ -1,5 +1,3 @@
-from enum import IntEnum
-
-class Player(IntEnum):
-    Black = 2
-    White = 1
+class Player():
+    Black = 'b'
+    White = 'w'

@@ -1,13 +1,15 @@
-from pieces import Pieces
+from mvc.Model.pieces import Pieces
 
 class Queen(Pieces):
 
     def __init__(self, color, location) -> None:
         super().__init__(color, location)
         self.img = 4
+        self.turn = 0
     
     def append_moves(self, board):
 
+        self.moves = []
         #move to top right
         for i in range(1,8):
 
