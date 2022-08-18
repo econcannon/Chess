@@ -25,7 +25,7 @@ class Pawn(Pieces):
                     x.append((self.location[0] + 2, self.location[1]))
 
             #test diagonal
-            if (self.location[0] + 1 < 8) and (self.location[1] + 1 < 7):
+            if (self.location[0] + 1 < 8) and (self.location[1] + 1 < 8):
                 cell = board.get_cell(self.location[0] + 1, self.location[1] + 1)
                 if cell != 0:
                     if cell.color != self.color:
@@ -49,7 +49,7 @@ class Pawn(Pieces):
                     x.append((self.location[0] - 2, self.location[1]))
 
             #test diagonal 
-            if (self.location[0] - 1 > -1) and (self.location[1] + 1 < 7):
+            if (self.location[0] - 1 > -1) and (self.location[1] + 1 < 8):
                 cell = board.get_cell(self.location[0] - 1, self.location[1] + 1)
                 if cell != 0:
                     if cell.color != self.color:

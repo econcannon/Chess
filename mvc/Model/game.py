@@ -4,6 +4,7 @@ from mvc.Model.board import Board
 import pygame
 from pygame.locals import *
 
+
 class Game:
     EMPTY = int(0)
 
@@ -16,6 +17,7 @@ class Game:
         self.turn = 0
         self.temp_piece = 0
         self.temp_pos = (0, 0)
+        self.winner = 0
         
     
     def get_new_moves(self):
@@ -37,7 +39,6 @@ class Game:
 
     
     def choose_move(self):
-
         #Returns the position of cell selected
 
         while True:
@@ -94,6 +95,10 @@ class Game:
         cell = piece.location
         self.remove_piece(cell)
         self.board.set_cell(piece, location[0], location[1])
+        if str(piece) == 'King':
+            if piece.color == 'b':
+                self.board.black_king_pos = location
+            else: self.board.white_king_pos = location
         piece.turn += 1
 
 
@@ -107,20 +112,23 @@ class Game:
         if other:
             #self then:
             #1st arg is piece that was just moved
-            #2nd arg is piece that was captured
-            #3rd arg is position of piece from arg 1 before movement
+            #2nd arg is location of piece that was moved before movement
+            #3rd arg is piece that was captured
             #4th arg is position of captured piece
             piece.turn -= 1
             #restores location attribute
             piece.location = location
-            #restores moved piece
+            if str(piece) == 'King':
+                if piece.color == 'b':
+                    self.board.black_king_pos = location
+                else: self.board.white_king_pos = location
+            #restores moved piece in board
             self.board.set_cell(piece, location[0], location[1])
-            self.remove_piece(location)
+            self.remove_piece(move)
             #restores captured piece
             self.board.set_cell(other, move[0], move[1])
             #restores list 
             self.board.pieces_lst.append(other)
-            piece.append_moves(self.board)
             self.view.display_board()
 
         else: 
@@ -130,7 +138,6 @@ class Game:
             #restore board
             self.board.set_cell(piece, location[0], location[1])
             self.remove_piece(move)
-            piece.append_moves(self.board)
             self.view.display_board()
 
 
@@ -176,7 +183,9 @@ class Game:
                 if piece.color == 'b':
 
                     if white_king_loc in piece.moves:
+                        print('IS IN CHECK')
                         return True
+                        
                     else: continue
             
             else:
@@ -184,7 +193,9 @@ class Game:
                 if piece.color == 'w':
             
                     if black_king_loc in piece.moves:
+                        
                         return True
+                        
                     else: continue
 
                 if piece.color == 'b':
@@ -194,13 +205,79 @@ class Game:
                 
 
     def check_mate(self):
-        return False
+        
+        if not self.is_in_check():
+            
+            return False
 
+        else:
+            for piece in self.board.pieces_lst:
+                
+                if self.current_player == piece.color:
 
-    def get_winner():
-        pass
+                    for move in piece.moves:
+                        
+                        move_val = self.board.get_cell(move[0], move[1])
 
+                        if move_val == 0:
+                            had_piece = False
+                        else: had_piece = True
 
-    def update_piece_location(self, location):
+                        self.save_temp(move_val, piece.location)
+                        #updates board info
+                        self.execute_move(piece, move)
+                        #updates list info
+                        self.view.board.update_list()
+                        #updates attribute info
+                        self.update_piece_location(move, piece)
+                        self.get_new_moves()
+                        
+                        if not self.is_in_check():
+                            
+                            #1st arg is piece that was just moved
+                            #2nd arg is piece that was captured
+                            #3rd arg is position of piece from arg 1
+                            #4th arg is position of captured piece
+                            if not had_piece:
+                                self.reverse_move(piece = piece, location = self.temp_pos, move = move)
 
-        self.view.has_selected_piece.location = location
+                            else: 
+                                self.reverse_move(piece, self.temp_pos, self.temp_piece, move)
+
+                            self.append_all_moves()
+                            return False
+
+                        else: 
+
+                            if not had_piece:
+                                self.reverse_move(piece = piece, location = self.temp_pos, move = move)
+                                
+                            else: 
+                                self.reverse_move(piece,  self.temp_pos, self.temp_piece, move)
+                            
+                            self.append_all_moves()
+                            continue
+            
+            print('check mate')
+            return True
+
+                    
+                
+                    
+
+    def get_winner(self):
+        
+        return self.other_player
+
+    def update_piece_location(self, location, piece = 0):
+        
+        if not piece:
+            self.view.has_selected_piece.location = location
+        else: piece.location = location
+
+    
+    def append_all_moves(self):
+
+        for piece in self.board.pieces_lst:
+
+            piece.append_moves(self.board)

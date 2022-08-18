@@ -15,8 +15,7 @@ class GameController:
 
         while not self.game.check_mate():
 
-            #Not yet defined
-            self.view.display_current_player()
+            pygame.display.set_caption('Chess')
             self.view.display_board()
 
             while True:
@@ -47,20 +46,23 @@ class GameController:
                     break
 
                 else: 
-
+                    
+                    self.view.display_in_check()
                     if not had_piece:
                         self.game.reverse_move(piece = self.view.has_selected_piece, location = self.game.temp_pos, move = cell)
                     #1st arg is piece that was just moved
                     #2nd arg is piece that was captured
                     #3rd arg is position of piece from arg 1
                     #4th arg is position of captured piece
-                    else: self.game.reverse_move(self.view.has_selected_piece, self.game.temp_piece, self.game.temp_pos, cell)
-
+                    else: self.game.reverse_move(self.view.has_selected_piece, self.game.temp_pos, self.game.temp_piece, cell)
+                    self.game.append_all_moves()
                     self.view.board.update_list()
                     self.view.display_in_check()
                     self.view.has_selected_piece = False
                     continue
 
                 
-        winner = self.model.get_winner()
+        winner = self.game.get_winner()
         self.view.display_winner(winner)
+        pygame.time.delay(7000)
+        pygame.quit()

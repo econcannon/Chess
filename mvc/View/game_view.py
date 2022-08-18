@@ -101,8 +101,8 @@ class GameView:
                 #Want to blit highlight of cell to indicate is selected
             #    pygame.draw.rect(self.window, (255, 0, 0), [block[0]*self.block_width, block[1]*self.block_height, self.block_height, self.block_width], 3)              
         
-        p = self.has_selected_piece
-        if p:
+        if self.has_selected_piece:
+            p = self.has_selected_piece
 
             #Want to blit highlight of cell to indicate is selected
             pygame.draw.rect(self.window, (255, 0, 0), [p.location[1]*self.block_width+1, p.location[0]*self.block_height+1, self.block_height-1, self.block_width-1], 3)
@@ -117,8 +117,23 @@ class GameView:
 
     
     def display_in_check(self):
-        pass
 
+        pygame.display.set_caption('IN CHECK')
+        
+
+    def display_winner(self, winner):
+
+        if winner == 'b':
+            title = pygame.image.load('mvc\\Model\\Imgs\\Black_Wins!.png')
+            pygame.transform.scale(title, (300, 100))
+            self.window.blit(title, (150, 250))
+            pygame.display.update()
+        
+        else:
+            title = pygame.image.load('mvc\\Model\\Imgs\\White_Wins!.png')
+            title = pygame.transform.scale(title, (300, 100))
+            self.window.blit(title, (150, 250))
+            pygame.display.update()
 
     def display_current_player(self):
         pass

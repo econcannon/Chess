@@ -1,4 +1,2 @@
-- Crashes after making a move and clicking on the position to which a piece was moved.
-    Fails with attribute error: 'Game' object has no attribute 'piece' in line 176 in capture_piece
-
-- Indexing of the board occasionally printing rows/cols to be greater than 7
+- Did not register that king was in check
+    then allowed piece to capture the king which resulted in a checkmate
